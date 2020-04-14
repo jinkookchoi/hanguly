@@ -1,0 +1,1417 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="inc/jquery-ui.css">
+	<link rel="stylesheet" href="inc/jquery-ui.theme.css">
+	<!-- Fonts -->
+	<link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/nanumgothic.css">
+	<link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/nanummyeongjo.css">
+	<!-- jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<!-- jQuery UI -->
+	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<!-- jQuery.twinkle 
+	<script src="js/jquery.twinkle-0.8.0"></script>-->
+<style>
+  body {
+      font: 20px Montserrat, sans-serif;
+      line-height: 1.8;
+      color: #f5f6f7;
+  }
+  p {font-size: 16px;}
+  .margin {margin-bottom: 45px;}
+  .bg-1 {
+      background-color: #1abc9c; /* Green */
+      color: #ffffff;
+  }
+  .bg-2 {
+      background-color: #474e5d; /* Dark Blue */
+      color: #ffffff;
+  }
+  .bg-3 {
+      background-color: #ffffff; /* White */
+      color: #555555;
+  }
+  .bg-4 {
+      background-color: #2f2f2f; /* Black Gray */
+      color: #fff;
+  }
+  .container-fluid {
+      padding-top: 70px;
+      padding-bottom: 70px;
+  }
+  .navbar {
+      padding-top: 15px;
+      padding-bottom: 15px;
+      border: 0;
+      border-radius: 0;
+      margin-bottom: 0;
+      font-size: 12px;
+      letter-spacing: 10px;
+      background-color: #1ab4bc;
+  }
+  .navbar-nav  li a:hover {
+      color: #1abc9c !important;
+  }
+  .footer {
+      padding-top: 30px;
+      padding-bottom: 30px;  	
+  }
+  .centerdiv {
+    width:100%;
+
+    /* Firefox */
+    display:-moz-box;
+    -moz-box-pack:center;
+    -moz-box-align:center;
+
+    /* Safari and Chrome */
+    display:-webkit-box;
+    -webkit-box-pack:center;
+    -webkit-box-align:center;
+
+    /* W3C */
+    display:box;
+    box-pack:center;
+    box-align:center;  	
+  }
+
+/* body {margin:0px;padding:0px;font-family: 'Nanum Gothic', serif} */
+.word-work-frame {
+/*	min-width: 1200px; */
+	width : 1560px;
+	height:800px;
+	background-color:yellow;
+	align:center;
+	padding-top: 15px;
+	padding-bottom: 50px;  	
+	padding-left: 30px;
+	padding-right: 30px;
+
+	border:10px solid #1abc9c; 
+	border-radius: 30px; /* dynamic value !!! */
+	background-color:#ecfcf9;
+
+}
+.word-work-interface {
+	clear: left;
+	display: table;
+	padding-top: 10px;
+	padding-bottom: 10px;  		
+}
+.syllable-set-ja, .syllable-set-mo {
+
+}
+.syllable-button-ja, .syllable-button-mo {
+	float: left;
+	width:1.5em;
+	height:1.5em;
+	line-height: 1.45em;
+	margin:0.1em; 
+	padding:0px;
+	border-radius: 0.1em; /* dynamic value !!! */
+	text-align: center;
+	font-size: 62px; /* dynamic value !!! */  
+	cursor: move;
+	border:0.08em solid #aaaaaa; 
+	z-index:10;
+}
+.syllable-button-ja, .syllable-button-mo {
+	color:white;
+	border-color:#2E86C1;
+	background: #005C97; /* For browsers that do not support gradients */
+	background: -webkit-linear-gradient(#005C97, #363795); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(#005C97, #363795); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(#005C97, #363795); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(#005C97, #363795); /* Standard syntax */
+}
+.syllable-button-ja:hover {
+	background:#2E4053;
+}
+
+.syllable-button-mo {
+    background-image : radial-gradient(
+      circle at top right,
+      yellow,
+      #f06d06
+    );
+	border-color:#E74C3C;
+}
+
+.syllable-button-mo:hover {
+	background:#E67E22;
+}
+.word-work-main {
+	clear: left;
+	height:1.4em;
+	font-size:250px;
+}
+.word-work-left, .word-work-right {
+	float: left;
+	width:35px;
+	height:100%;
+}
+.word-work-canvas {
+	float: left;
+/*	width: calc(100% - 200px); */
+/* https://css-tricks.com/a-couple-of-use-cases-for-calc/ */
+	width: calc(100%-35px);
+}
+.word-suggested {
+	width:20em;
+	line-height:2.5em;
+	font-size:40px;
+}
+.word-suggested-text {
+	background-color:white;
+	font-size:60px;
+	padding:0.1em;
+	border:0.05em solid #aaaaaa; 
+	border-radius: 0.145em; /* dynamic value !!! */
+}
+.word-suggested-result {
+	font-size:60px;
+	color:#FFA500;
+}
+.word-set {
+	float: left;
+	vertical-align: middle; 
+	width:1.4em; /* dynamic value !!! */
+	height:1.4em; /* dynamic value !!! */
+	line-height: 1.4em; /* dynamic value !!! */
+	margin:0.04em; 
+	padding:0;
+	border:0.02em solid #aaaaaa; 
+	border-radius: 0.145em; /* dynamic value !!! */
+	background-color:white; /* #FEF9E7; */
+	text-align: center;
+	font-size: 230px; /* dynamic value !!! */
+}
+.word-set-value {
+	position:relative;
+	top: 0px;
+	left: 0px; 
+	width: 100%; 
+	height: 100%;
+	z-index: 2;
+}
+.word-set-suggested {
+	width:100%; 
+	height:100%;
+	position:relative;
+	top:-100%;
+	left: 0px;
+	z-index:1;
+	color:#F2F4F4;
+	border-radius: 0.125em 0.125em 0.125em 0.125em ; 
+}
+.word-set-first {
+	width:100%; 
+	height:50%;
+	position:relative;
+	top:-200%;
+	left: 0px;
+	z-index:3;
+}
+.word-set-end {
+	width:100%; 
+	height:50%;
+	position:relative;
+	top:-200%;
+	left: 0px;
+	z-index:3;
+}
+.word-set-interface {
+	width:100%; 
+	height:20%;
+	position:relative;
+	top:-220%;
+	left: 0px;
+	z-index:5;
+/*	background-color:green; */
+}
+.word-set-first-hover {
+	background-color:rgba(250,128,144,0.5); 
+	border-radius: 0.125em 0.125em 0px 0px; 
+}
+.word-set-middle-hover {
+	background-color:rgba(255, 87, 51,0.5); 
+	border-radius: 0.125em 0.125em 0.125em 0.125em ; 
+}
+.word-set-end-hover {
+	background-color:rgba(52,152,219,0.5); 
+	border-radius: 0px 0px 0.125em 0.125em; 
+}
+.word-set-button-clear, .word-set-button-delete {
+	position:absolute;
+	z-index:5; 
+	bottom:1em;
+	width:3.5em;
+	height:1.3em;
+	font-size: 20px;
+	line-height: 1.2em;
+	border:0.1em solid #aaaaaa; 
+	border-radius: 0.2em; /* dynamic value !!! */
+	background-color:white;
+	text-align: center;
+}
+.word-set-button-clear {
+	left:1em;	
+}
+.word-set-button-delete {
+	right:1em;
+}
+.word-set-button-clear:hover {
+	cursor:hand;
+	background-color:#80ccff;
+	color:white;
+}
+.word-set-button-delete:hover {
+	cursor:hand;
+	background-color:#ff8080;
+	color:white;
+}
+.word-work-left {
+	display:none;
+}
+.word-work-right {
+	float:right;
+}
+.word-button-add-right {
+	background-color:white;
+	width:1.2em;
+	height:12em;
+	line-height: 12em;
+	font-size:28px;
+	border:1px solid #aaaaaa;
+	border-radius: 0.2em;
+	text-align: center;
+}
+.word-button-add-right:hover {
+	background-color:#ccc;
+}
+.noselect {
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none;   /* Chrome/Safari/Opera */
+	-khtml-user-select: none;    /* Konqueror */
+	-moz-user-select: none;      /* Firefox */
+	-ms-user-select: none;       /* Internet Explorer/Edge */
+	user-select: none;           /* Non-prefixed version, currently
+	                              not supported by any browser */
+}
+/** flash start 
+http://stackoverflow.com/questions/275931/how-do-you-make-an-element-flash-in-jquery
+**/
+.flash {
+  -moz-animation: flash 0.8s ease-out;
+  -moz-animation-iteration-count: 3;
+
+  -webkit-animation: flash 0.8s ease-out;
+  -webkit-animation-iteration-count: 3;
+
+  -ms-animation: flash 0.8s ease-out;
+  -ms-animation-iteration-count: 3;
+}
+@-webkit-keyframes flash {
+    0% { background-color: none; }
+    50% { background-color: #8EE5EE; }
+    100% { background-color: none; }
+}
+
+@-moz-keyframes flash {
+    0% { background-color: none; }
+    50% { background-color: #8EE5EE; }
+    100% { background-color: none; }
+}
+
+@-ms-keyframes flash {
+    0% { background-color: none; }
+    50% { background-color: #8EE5EE; }
+    100% { background-color: none; }
+}
+/** flash end **/
+@media (max-width: 1400px) {
+    .syllable-button-ja, .syllable-button-mo {
+        font-size: 60px; 
+    }
+    .word-set {
+        font-size : 250px;
+    }
+    .word-set-button-clear, .word-set-button-delete {
+    	font-size : 20px;
+    }
+}
+@media (max-width: 1000px) {
+    .syllable-button-ja, .syllable-button-mo {
+        font-size: 40px; 
+    }
+    .word-set {
+        font-size : 150px;
+    }
+    .word-set-button-clear, .word-set-button-delete {
+    	font-size : 12px;
+    }
+}
+</style>
+<script>
+/** @reference http://atspeed.blogspot.kr/2011/01/javascript-hashmap.html */
+Map = function(){
+ this.map = new Object();
+};   
+Map.prototype = {   
+    put : function(key, value){   
+        this.map[key] = value;
+    },   
+    get : function(key){   
+        return this.map[key];
+    },
+    containsKey : function(key){    
+     return key in this.map;
+    },
+    containsValue : function(value){    
+     for(var prop in this.map){
+      if(this.map[prop] == value) return true;
+     }
+     return false;
+    },
+    isEmpty : function(key){    
+     return (this.size() == 0);
+    },
+    clear : function(){   
+     for(var prop in this.map){
+      delete this.map[prop];
+     }
+    },
+    remove : function(key){    
+     delete this.map[key];
+    },
+    keys : function(){   
+        var keys = new Array();   
+        for(var prop in this.map){   
+            keys.push(prop);
+        }   
+        return keys;
+    },
+    values : function(){   
+     var values = new Array();   
+        for(var prop in this.map){   
+         values.push(this.map[prop]);
+        }   
+        return values;
+    },
+    size : function(){
+      var count = 0;
+      for (var prop in this.map) {
+        count++;
+      }
+      return count;
+    }
+};
+/** @reference http://javahwan.tistory.com/99 */
+Object.equals = function(x, y) {
+    if (x === y) return true;
+    // if both x and y are null or undefined and exactly the same
+    if (!(x instanceof Object) || !(y instanceof Object)) return false;
+    // if they are not strictly equal, they both need to be Objects
+    if (x.constructor !== y.constructor) return false;
+    // they must have the exact same prototype chain, the closest we can do is
+    // test there constructor.
+    for (var p in x) {
+        if (!x.hasOwnProperty(p)) continue;
+        // other properties were tested using x.constructor === y.constructor
+        if (!y.hasOwnProperty(p)) return false;
+        // allows to compare x[ p ] and y[ p ] when set to undefined
+        if (x[p] === y[p]) continue;
+        // if they have the same strict value or identity then they are equal
+        if (typeof(x[p]) !== "object") return false;
+        // Numbers, Strings, Functions, Booleans must be strictly equal
+        if (!Object.equals(x[p], y[p])) return false;
+        // Objects and Arrays must be tested recursively
+    }
+    for (p in y) {
+        if (y.hasOwnProperty(p) && !x.hasOwnProperty(p)) return false;
+        // allows x[ p ] to be set to undefined
+    }
+    return true;
+}
+// https://javascriptweblog.wordpress.com/2010/04/05/curry-cooking-up-tastier-functions/
+// https://javascriptweblog.wordpress.com/2010/04/19/how-evil-is-eval/
+function toarr(enums) {
+    return Array.prototype.slice.call(enums);
+}
+Function.prototype.curry = function() {
+    if (arguments.length<1) {
+        return this; //nothing to curry with - return function
+    }
+    var __method = this;
+    var args = toarr(arguments);
+    return function() {
+        return __method.apply(this, args.concat(toarr(arguments)));
+    }
+}
+/** @const */
+var jamoSet = new function() {
+	this.ja = new Array('ㄱ', 'ㄴ', 'ㄷ',  'ㄹ', 'ㅁ', 'ㅂ',  'ㅅ',  'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ');
+	this.mo = new Array('ㅏ', 'ㅑ', 'ㅓ', 'ㅕ', 'ㅗ', 'ㅛ', 'ㅜ','ㅠ', 'ㅡ', 'ㅣ');
+}
+/** @define {string} */
+var FIRST_CHAR = 'first';
+var MIDDLE_CHAR = 'middle';
+var END_CHAR = 'end';
+/**
+ * 한글의 한 음을 구성하는 초성, 중성, 종성을 정의하고 
+ * 공통 함수를 사용할 수 있음
+ * @const {Object}
+ */
+var syllableSet = new function() {
+	/** @reference http://develop.sunshiny.co.kr/876#recentTrackbacks */
+	this.firstCodes = new Array('ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ');
+	this.middleCodes = new Array('ㅏ', 'ㅐ', 'ㅑ', 'ㅒ', 'ㅓ', 'ㅔ', 'ㅕ', 'ㅖ', 'ㅗ', 'ㅘ', 'ㅙ', 'ㅚ', 'ㅛ', 'ㅜ', 'ㅝ', 'ㅞ', 'ㅟ', 'ㅠ', 'ㅡ', 'ㅢ', 'ㅣ');
+	this.endCodes = new Array(' ','ㄱ', 'ㄲ', 'ㄳ', 'ㄴ', 'ㄵ', 'ㄶ', 'ㄷ', 'ㄹ', 'ㄺ', 'ㄻ', 'ㄼ', 'ㄽ', 'ㄾ', 'ㄿ', 'ㅀ', 'ㅁ', 'ㅂ', 'ㅄ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ');
+	/**
+	 * @dict 초성 복합형 정의 해시맵
+	 */
+	this.firstCodesComp = new Map();
+	this.firstCodesComp.put('ㄲ', new Array('ㄱ', 'ㄱ'));
+	this.firstCodesComp.put('ㄸ', new Array('ㄷ', 'ㄷ'));
+	this.firstCodesComp.put('ㅃ', new Array('ㅂ', 'ㅂ'));
+	this.firstCodesComp.put('ㅆ', new Array('ㅅ', 'ㅅ'));
+	this.firstCodesComp.put('ㅉ', new Array('ㅈ', 'ㅈ'));
+	
+	/**
+	 * @dict 모음 복합형 정의 해시맵
+	 */
+	this.middleCodesComp = new Map();
+	this.middleCodesComp.put('ㅐ', new Array('ㅏ', 'ㅣ'));
+	this.middleCodesComp.put('ㅒ', new Array('ㅑ', 'ㅣ'));
+	this.middleCodesComp.put('ㅔ', new Array('ㅓ', 'ㅣ'));
+	this.middleCodesComp.put('ㅖ', new Array('ㅕ', 'ㅣ'));
+	this.middleCodesComp.put('ㅘ', new Array('ㅗ', 'ㅏ'));
+	this.middleCodesComp.put('ㅙ', new Array('ㅗ', 'ㅏ', 'ㅣ'));
+	this.middleCodesComp.put('ㅚ', new Array('ㅗ', 'ㅣ'));
+	this.middleCodesComp.put('ㅝ', new Array('ㅜ', 'ㅓ'));
+	this.middleCodesComp.put('ㅞ', new Array('ㅜ', 'ㅓ', 'ㅣ'));
+	this.middleCodesComp.put('ㅟ', new Array('ㅜ', 'ㅣ'));
+	this.middleCodesComp.put('ㅢ', new Array('ㅡ', 'ㅣ'));
+	/**
+	 * @dict 종성 자음 복합형 정의 해시맵
+	 */
+	this.endCodesComp = new Map();
+	this.endCodesComp.put('ㄲ', new Array('ㄱ', 'ㄱ'));	
+	this.endCodesComp.put('ㄳ', new Array('ㄱ', 'ㅅ'));	
+	this.endCodesComp.put('ㄵ', new Array('ㄴ', 'ㅈ'));	
+	this.endCodesComp.put('ㄶ', new Array('ㄴ', 'ㅎ'));	
+	this.endCodesComp.put('ㄺ', new Array('ㄹ', 'ㄱ'));	
+	this.endCodesComp.put('ㄻ', new Array('ㄹ', 'ㅁ'));	
+	this.endCodesComp.put('ㄼ', new Array('ㄹ', 'ㅂ'));	
+	this.endCodesComp.put('ㄽ', new Array('ㄹ', 'ㅅ'));	
+	this.endCodesComp.put('ㄾ', new Array('ㄹ', 'ㅌ'));	
+	this.endCodesComp.put('ㄿ', new Array('ㄹ', 'ㅍ'));	
+	this.endCodesComp.put('ㅀ', new Array('ㄹ', 'ㅎ'));	
+	this.endCodesComp.put('ㅄ', new Array('ㅂ', 'ㅅ'));	
+	this.endCodesComp.put('ㅆ', new Array('ㅅ', 'ㅅ'));		
+	/**
+	 * 문자의 번호를 입력하여 해당 문자 값을 반환
+	 * 일련 번호 조회가 안될 시 null 값을 반환
+	 * @param {number} num 문자의 번호
+	 * @param {string} ord 초성, 중성, 종성을 의미하며 예약어를 사용함
+	 * @reference http://devbible.tistory.com/69
+	 */
+	this.getCodeByNum = function(num, ord) {
+		var rtnCode = null;
+		switch(ord) {
+			case FIRST_CHAR:
+				rtnCode = this.firstCodes[num];
+				break;
+			case MIDDLE_CHAR:
+				rtnCode = this.middleCodes[num];
+				break;
+			case END_CHAR:
+				rtnCode = this.endCodes[num];
+				break;
+			default:
+				break;
+		}		
+		if(rtnCode == undefined)
+			rtnCode = null;
+		return rtnCode;
+	}
+	/**
+	 * 문자(ㄱ,ㄴ,ㅏ,ㅓ)를 입력하여 해당 문자의 일련번호를 반환
+	 * 일련 번호 조회가 안될 시 null 값을 반환
+	 * @param {string} code 조회할 문자
+	 * @param {string} ord 초성, 중성, 종성을 의미하며 예약어를 사용함
+	 */
+ 	this.getCodeNum = function(code, ord) {
+		var rtnNum = null;
+		switch(ord) {
+			case FIRST_CHAR: 
+				rtnNum = this.firstCodes.indexOf(code);
+				break;
+			case MIDDLE_CHAR:
+				rtnNum = this.middleCodes.indexOf(code);
+				break;
+			case END_CHAR:
+				rtnNum = this.endCodes.indexOf(code);
+				break;
+		}
+		if(rtnNum > -1) {
+			return rtnNum;
+		}
+		else
+			return null;
+	}
+	/**
+	 * 문자(ㄱ,ㄴ,ㅏ,ㅓ)의 배열 값을 입력하여 
+	 * 복합 문자(ㄲ, ㅐ)의 일련 번호를 계산
+	 * 일련 번호 조회가 안될 시 false 값을 반환
+	 * @param {array} codes 복합 검사를 할 문자의 배열 값
+	 * @param {string} ord 초성, 중성, 종성을 의미하며 예약어를 사용함
+	 */	
+	this.getCompCodeNum = function(codes, ord) {
+		// 초성과 종성인데 복합 검사가 2개가 아닐 경우 false 반환
+		if(ord == FIRST_CHAR || ord == END_CHAR) {
+			if(codes.length != 2)
+				return false;
+		// 중성인데 복합 검사가 3개 이상일 경우 false 반환
+		} else if(ord == MIDDLE_CHAR) {
+			if(codes.length > 3)
+				return false;
+		} else
+			return false;
+		var rtnNum;
+		switch(ord) {
+			case FIRST_CHAR:
+				switch(codes[1]) {
+					case 'ㄱ':
+					case 'ㄷ':
+					case 'ㅂ':
+					case 'ㅅ':
+					case 'ㅈ':
+						if(codes[0] == codes[1])
+							rtnNum = this.getCodeNum(codes[0], ord) + 1;
+						break;
+					default:
+						return null;
+						break;
+				}
+				break;
+			case MIDDLE_CHAR:
+				codes.sort();
+				var idx = false;
+				this.middleCodesComp.values().forEach(function(item, index, array) {
+					item.sort();
+					if(Object.equals(codes, item))
+						idx = index;
+				});
+				comChar = this.middleCodesComp.keys()[idx];	
+				if(comChar)
+					rtnNum = this.getCodeNum(comChar, ord);
+				else
+					return false;
+				break;
+			case END_CHAR:
+				codes.sort();
+				var idx = false;
+				this.endCodesComp.values().forEach(function(item, index, array) {
+					item.sort();
+					if(Object.equals(codes, item))
+						idx = index;
+				});
+				comChar = this.endCodesComp.keys()[idx];	
+				if(comChar)
+					rtnNum = this.getCodeNum(comChar, ord);
+				break;
+		}
+		return rtnNum;
+	}
+	/**
+	 * 복합 문자(ㅝ)의 배열 값을 입력하여 
+	 * 단일 문자(ㅜ, ㅓ)로 분해하여 배열로 값을 반환
+	 * @param {string} code 결합된 복합 문자
+	 * @param {string} ord 초성, 중성, 종성을 의미하며 예약어를 사용함
+	 */		
+	this.getDecompCodeNum = function(code, ord) {
+		var rtnArr = new Array();
+		if(ord == FIRST_CHAR) {
+			if(this.checkCompCode(code,ord)) {
+				rtnArr = this.firstCodesComp.get(code);
+			} else {
+				rtnArr.push(code);
+				rtnArr.sort();
+			}
+		}
+		// 중성만 우선 구현
+		if(ord == MIDDLE_CHAR) {
+			if(this.checkCompCode(code,ord)) {
+				rtnArr = this.middleCodesComp.get(code);
+			} else {
+				rtnArr.push(code);
+				rtnArr.sort();
+			}
+		}
+		if(ord == END_CHAR) {
+			if(this.checkCompCode(code,ord)) {
+				rtnArr = this.endCodesComp.get(code);
+			} else {
+				rtnArr.push(code);
+				rtnArr.sort();
+			}
+		}
+		return rtnArr;
+	}
+	/**
+	 * 초성, 중성, 종성의 문자 일련번호를 입력하여 결합된 단일 형태소를 반환
+	 * 초성과 중성의 값이 각각 불완전 할 경우 
+	 * 중성과 초성 값을 세팅함
+	 * @param {integer} n1 초성의 일련번호 값
+	 * @param {integer} n2 중성의 일련번호 값	 
+	 * @param {integer} n3 종성의 일련번호 값	 
+	 */		
+	this.getFromCharCodeNum = function(n1, n2, n3) {
+		if(n2<0 || n2==null) 
+			return this.firstCodes[n1];
+		if(n1<0 || n1==null) 
+			return this.middleCodes[n2];
+		return String.fromCharCode( 44032 + (n1 * 588) + (n2 * 28) + n3);
+	}
+	this.checkCharacter = function(test) {
+		var nTmp = test.charCodeAt(0) - 0xAC00;
+		if(nTmp >= 0)
+			return true;
+		else
+			return false;
+	}
+	/**
+	 * @reference http://dream.ahboom.net/entry/한글-유니코드-자소-분리-방법
+	 * @reference http://mwultong.blogspot.com/2006/11/javascript-unicode-ascii-code.html
+	 */
+	this.getDecompSyllableNum = function(char) {
+		var rtnArr = new Array();
+		var nTmp = char.charCodeAt(0) - 0xAC00;
+		n3 = nTmp % 28; // 종성
+		n2 = ((nTmp - n3) / 28 ) % 21 // 중성
+		n1 = ( ( (nTmp - n3) / 28 ) - n2 ) / 21 // 초성
+		firstCode = this.getCodeByNum(n1, FIRST_CHAR);
+		middleCode = this.getCodeByNum(n2, MIDDLE_CHAR);
+		endCode = this.getCodeByNum(n3, END_CHAR);
+		if(this.checkCompCode(firstCode, FIRST_CHAR) || firstCode == null) {
+			var compArr = this.getDecompCodeNum(firstCode, FIRST_CHAR);
+			var tmpArr = new Array();
+			for(var i =0; i<compArr.length; i++) 
+				tmpArr.push([compArr[i], FIRST_CHAR]);
+			
+			rtnArr = rtnArr.concat(tmpArr);
+		}
+		else
+			rtnArr.push([firstCode, FIRST_CHAR]);
+		if(this.checkCompCode(middleCode, MIDDLE_CHAR) || middleCode == null) {
+			var compArr = this.getDecompCodeNum(middleCode, MIDDLE_CHAR);
+			var tmpArr = new Array();
+			for(var i =0; i<compArr.length; i++) 
+				tmpArr.push([compArr[i], MIDDLE_CHAR]);
+			rtnArr = rtnArr.concat(tmpArr);
+		}
+		else
+			rtnArr.push([middleCode, MIDDLE_CHAR]);
+		if(this.checkCompCode(endCode, END_CHAR) || endCode == null) {
+			var compArr = this.getDecompCodeNum(endCode, END_CHAR);
+			var tmpArr = new Array();
+			for(var i =0; i<compArr.length; i++) 
+				tmpArr.push([compArr[i], END_CHAR]);
+			
+			rtnArr = rtnArr.concat(tmpArr);
+		}
+		else
+			rtnArr.push([endCode, END_CHAR]);
+		return rtnArr;
+	}
+	/**
+	 * 입력된 문자 값이 복합 문자 값인 지 확인
+	 * @param {string} code 문자
+	 * @param {string} ord 초성, 중성, 종성을 의미하며 예약어를 사용함	 
+	 */
+	this.checkCompCode = function(code, ord) {
+		var rtnVal = false;
+		if(code == 'null' || !code || code < 0)
+			return rtnVal;
+		switch(ord) {
+			case 'first': 
+				var firstCompArr = new Array('ㄲ', 'ㄸ', 'ㅃ', 'ㅆ', 'ㅉ');
+				for(var i=0, len = firstCompArr.length; i<len;i++)	{
+					if(firstCompArr[i] == code) {
+						rtnVal = code;
+						break;
+					}
+				}
+				break;
+			case 'middle':
+				if(this.middleCodesComp.containsKey(code)) {
+					rtnVal = code;
+					break;
+				}
+				break;
+			case 'end':
+				if(this.endCodesComp.containsKey(code)) {
+					rtnVal = code;
+					break;
+				}
+				break;
+		}
+		return rtnVal;
+	}
+}
+//http://blog.daum.net/_blog/BlogTypeView.do?blogid=0Cnf6&articleno=16498221
+function character() {
+	this.value = "";
+	this.firstCode = null;
+	this.middleCode = null;
+	this.endCode = null;
+	this.history = new Array();
+	this.setCode = function(code, ord) {
+		// http://kssong.tistory.com/26
+		var rtnVal = false;
+		this.history.push(Array(code, ord));
+		
+		switch(ord) {
+			case 'first':
+				if (this.firstCode == null)
+					this.firstCode = code; 
+				else { 
+					var cm = syllableSet.getCompCodeNum([this.firstCode, code], ord);
+					cd = syllableSet.getCodeByNum(cm, ord);
+					if (cm) {
+						this.firstCode = cd;
+					}
+					else {
+						this.firstCode = code;
+					}
+				}
+				break;
+			case 'middle':
+				if (this.middleCode == null)
+					this.middleCode = code; // 초기 세팅일 경우
+				else {
+					// 현재 중성이 복합형인지? => 2 or 3
+					deArr = syllableSet.checkCompCode(this.middleCode, ord);
+					if(deArr) {
+					// 복합형 맞음 
+						var deNum = syllableSet.getDecompCodeNum(this.middleCode, ord);
+						
+						// 추가될 여지가 있는지? => 2
+						if( deNum.length == 2) {
+							// 합성 가능한지?
+							// 예: 워 + ㅣ => 웨
+							// 예: 외 + ㅏ or 애 + ㅗ => 왜 
+							// 입력을 ㅝ 로 하면 ㅜ + ㅓ 가 나오는 함 수 필요
+							var checkArr = new Array();
+							checkArr[0] = deNum[0];
+							checkArr[1] = deNum[1];
+							checkArr[2] = code;
+							cD = syllableSet.getCompCodeNum(checkArr, ord);
+							if(cD) 
+								this.middleCode = syllableSet.getCodeByNum(cD, ord);
+							else
+								this.middleCode = code;
+							// 합성 불가
+							// 예: 외 + ㅜ => ㅜ
+						} else if (deNum.length == 3) {
+							// 아니라면 (기존값 : 웨 or 왜) => 3
+							// 입력 값으로 대체함
+							this.middleCode = code;
+						} else {
+							return false;
+						}
+					} else { 
+						// 아니라면 복합 처리
+						var checkArray = [this.middleCode, code];
+						cc = syllableSet.getCompCodeNum(checkArray, ord);
+						// 조합형이 있을 경우
+						// 예: 오 + ㅣ => 외 
+						if(cc) 
+							this.middleCode = syllableSet.getCodeByNum(cc, ord);
+						else {
+							// 조합형이 없을 경우
+							// 입력 값으로 대체함
+							// 예: 오 + ㅜ => 우
+							this.middleCode = code;
+						}
+					}
+				}
+				break;
+			case 'end':
+				if (this.endCode == null)
+					this.endCode = code;
+				else {
+					// 복합형으로 세팅되어져 있었을 경우(예:ㄹㄱ ) 새로운 문자로 대치
+					if(syllableSet.checkCompCode(this.endCode, 'end')) {
+						this.endCode = code;
+					} else {
+						// 복수개의 종성이 세팅될 경우
+						var endArray = new Array();
+						this.history.forEach(function (item, index, array) {
+							if(item[1] == 'end')
+								endArray.push(item[0]);
+						});
+						var newEndArray = new Array();
+						newEndArray = endArray.splice(-2);						
+						var cm = syllableSet.getCompCodeNum(newEndArray, ord);
+						cd = syllableSet.getCodeByNum(cm, ord);
+						if (cm)
+							this.endCode = cd;
+						else 
+							this.endCode = code;
+					}
+				}
+				break;
+		}
+		a = syllableSet.getCodeNum(this.firstCode, 'first');
+		b = syllableSet.getCodeNum(this.middleCode, 'middle');
+		c = syllableSet.getCodeNum(this.endCode, 'end');
+		this.value = syllableSet.getFromCharCodeNum(a,b,c);
+		return true;
+	}
+	this.setCodeArray = function(codes, ord) {
+		for(var i=0, len = codes.length; i<len;i++)	{
+			if(!codes[i]) 
+				this.setCode(codes[i], ord);
+		}
+	}	
+	this.getChar = function(ord) {
+		if(!ord)
+			return this.value;
+		else {
+			switch(ord) {
+				case 'first':
+					return this.firstCode;
+					break;
+				case 'middle':
+					return this.middleCode;
+					break;
+				case 'end':
+					return this.endCode;
+					break;
+			}
+		}
+	}
+	this.setChar = function(char) {
+		cArr = syllableSet.getDecompSyllableNum(char);
+		for(var j=0; j<cArr.length;j++) {
+			cV = cArr[j];
+			this.setCode(cV[0], cV[1]);
+		}
+	}
+}
+function word(wd) {
+	this.value = new String();
+	this.characters = new Array();
+	this.pushCharacter = function(char) {
+//		if(syllableSet.checkCharacter(char))
+//			var chr = new characters.setChar(char);
+//			this.chac
+		// '각' 입력시
+		this.characters.push(char);
+	}
+
+	this.setCharacter = function(num, code, ord) {
+		console.log("[word-setCharacter] num : ", num, " code : ", code, " ord : ", ord);
+		// '각' 입력시		
+		if(syllableSet.checkCharacter(code)) {
+			val = new word();
+			val.setWord(code);
+//			console.log("val ", val);
+			this.characters[num] = val.characters[0];
+		} else
+			this.characters[num].setCode(code, ord);
+			// 'ㄱ' 입력시 
+	}
+	this.getCharacter = function(num, ord) {
+		console.log('word getcharacter - ', num, ', ', ord);
+		if(!ord) {
+			if(this.characters[num]) {
+				console.log('word getcharacter - ! ', num, ' - ', this.characters[num].getChar());
+				return this.characters[num].getChar();
+			}
+			else
+				return null;
+		} else {
+			return this.characters[num].getChar(ord);
+		}
+	}
+	this.deleteCharacter = function(num) {
+		return this.characters.splice(num, 1);
+	}
+	this.clearCharacter = function(num) {
+		var blankC = new character();
+		this.characters[num] = blankC;
+	}
+	this.getWord = function() {
+		var tmpStr = "";
+		for(var i=0; i<this.characters.length; i++)
+			tmpStr += this.getCharacter(i);
+		this.value = tmpStr;
+		return this.value;
+	}
+	this.setWord = function(wrd) {
+		if(wrd == undefined)
+			return false;
+		else {
+			this.value = new String();
+			this.characters = new Array();
+			// http://icoon22.tistory.com/219
+			wrdArr = wrd.trim().split("");
+			for(var i=0; i<wrdArr.length; i++) {
+				// setCharacter를 쓰기 위해서는
+				// 단위 분해가 더 필요하다.
+				// 닭 -> ㄷ/first + ㅏ/middle + ㄹ/ㄱ/end
+				// return String.fromCharCode( 44032 + (n1 * 588) + (n2 * 28) + n3);
+				// 예) 가 - 44032
+				// 가 => 순수 한글 코드 : 44032 - 44032 = A
+				// 종성 -> 순수한글 코드를 28로 나눈 나머지 
+				// A % 20 => 종성 코드 
+				// syllableSet.getDecompSyllableNum("롭") -> [["ㄹ","first"], [""]]
+				
+				var char = new character();
+				// character.setChar() 함수 사용하는 것으로 수정 필요
+				cArr = syllableSet.getDecompSyllableNum(wrdArr[i]);
+				for(var j=0; j<cArr.length;j++) {
+					cV = cArr[j];
+					char.setCode(cV[0], cV[1]);
+				}
+				this.pushCharacter(char);
+			}
+			this.value = this.getWord();
+			return true;
+		}
+	}
+	this.clear = function() {
+		this.value = "";
+		this.characters = new Array();
+	}
+	this.equals = function(test) {
+		// 문자열 길이가 0이상이면 성공
+		// http://icoon22.tistory.com/219
+		if((typeof test == "string") && (test.length > 0)){
+			if(this.value == test)
+				return true;
+		} if((typeof test.value == "string") && (test.value.length > 0)){
+			if(this.value == test.value)
+				return true;
+		} else
+			return false;
+	}
+
+	if(wd)
+		this.setWord(wd);	
+}
+/*
+var ww = new wordwork();
+ww.config.put("drg-ja", "syllable-button-ja");
+ww.config.put("drg-mo", "syllable-button-mo");
+ww.config.put("wd-fisrt", "word-set-first");
+*/
+
+/*
+최소한 한글 단어 대부분의 게임은 포함되도록 범용 클래스로 제작
+*/
+function wordplay() {
+	this.name = "단어 만들기";
+	this.prewords = new Array(); // word 클래스.. 대
+	this.words = new Array();
+	this._current_idx = null;
+	this._current_pre_idx = null;
+	this._current_word = null;
+	this.config = new Map();
+	this.setNewCharacter = function(char) {
+		console.log('setNewCharacter - ' , this.getCurrentWord());
+//		if(char)
+			this.getCurrentWord().pushCharacter(char);
+//		else
+//			this.getCurrentWord().pushCharacter(new character());
+	}
+	this.getWordCharacter = function(noc, ord) {
+		console.log('get word character ', noc, ', ', ord);
+		return this.getCurrentWord().getCharacter(noc, ord);
+	}
+	this.setWordCharacter = function(noc, char, ord) {
+		console.log('set word character ', noc, ', ', char, ', ' , ord);
+
+		var rtn =  this.getCurrentWord().setCharacter(noc, char, ord);
+		this.refreshCanvas();
+		console.log('set word character : ', this.getCurrentWord());
+	
+		return rtn;
+	}
+	this.getCurrentWord = function() {
+		if(!this.words[this._current_idx])
+			return false;
+
+		return this.words[this._current_idx];
+	}
+	this.refreshCanvas = function() {
+		var wordsetvalue = this.config.get("wsv");
+
+		for(var i = 0; i <$(wordsetvalue).length; i++ ) {
+			console.log('wordplay refresh canvas - ', $(wordsetvalue).eq(i), ' - ' , this.getWordCharacter(i));
+
+			$(wordsetvalue).eq(i).text(this.getWordCharacter(i));
+		}
+	}
+	this.putWord = function(word) {
+		this.words.push(word);
+		var len = this.words.length;
+		this._current_idx = len - 1;
+
+		return this._current_idx;
+	}
+	this.setWordCharacterClear = function(noc) {
+		this.getCurrentWord().clearCharacter(noc);
+		this.refreshCanvas();
+	}
+	this.setWordCharacterDelete = function(noc) {
+		console.log('wordplay delete ', noc);
+		this.getCurrentWord().deleteCharacter(noc);
+	}
+	this.createWord = function(char) {
+		var wd = new word();
+		var chr = null;
+		/*
+		if(!char)
+			chr = new character();
+		else
+		*/
+			chr = char;
+		wd.pushCharacter(chr);
+		this.putWord(wd);
+	}
+	this.getBeforeWord = function() {}
+	this.getNextWord = function() {
+	}
+	this.goNextPreWord = function() {
+		/*
+				console.log('cur id - ', this._current_idx);
+
+		this._current_idx =+ 1;
+		console.log()
+		return this.getCurrentWord();
+						console.log('mk cur id - ', this._current_idx);
+		*/
+	}
+	this.getWordList = function() {}
+	this.getPreWordList = function(cpidx) {
+		if(cpidx) {
+			return this.prewords[cpidx];
+		} else
+			return this.prewords[this._current_pre_idx];
+
+	}
+	this.setPreWordList = function(wlarr) {
+		// 나중에 병합해서 추가 되도록 수정
+		this.prewords = wlarr;
+		this._current_pre_idx = 0;
+	}
+	this.goNextPreWord = function() {
+		this._current_pre_idx = this._current_pre_idx + 1;
+		return this.getPreWord();
+	}
+	this.goBackPreWord = function() {}
+	this.getPreWord = function(ino) {
+		if(this.prewords[this._current_pre_idx + ino] || !ino) {
+			ino = 0;
+			console.log('get pre word - ' , ino, ' + ' ,this._current_pre_idx, ' => ', this.prewords);
+			return this.prewords[(this._current_pre_idx + ino)]
+		}
+		else
+			return false;
+	}
+}
+
+// new word play object
+var _wp = new wordplay();
+_wp.config.put("wsv", ".word-set-value");
+// 향후 word 객체를 직접 할당, 한글/이미지 등의 정보 반영 
+_wp.setPreWordList([new word("곰돌이"), new word("아이"), new word("너"), new word("여우"), new word("가위"), new word("놀이터"), new word("자동차"), new word("최은서"), new word("바나나"),  new word("우리나라"), new word("태극기"), new word("최연우"), new word("이정현"), new word("최진국"), new word("엄마"), new word("아빠"), new word("돼지"), new word("똥"), new word("방구")]);
+
+$(document).ready(function(){
+	// ja button set
+	for(var i=0; i<jamoSet.ja.length; i++) {
+		var nsyllablebtnja = $("<div></div>").text(jamoSet.ja[i]).addClass("syllable-button-ja").draggable({
+			helper: "clone",
+		});
+
+		nsyllablebtnja.hide().appendTo('.syllable-set-ja').fadeIn(500);
+	}
+	// mo button set
+	for(var i=0; i<jamoSet.mo.length; i++) {
+		var nsyllablebtnmo = $("<div></div>").text(jamoSet.mo[i]).addClass("syllable-button-mo").draggable({
+			helper: "clone",
+		});
+
+		nsyllablebtnmo.hide().appendTo('.syllable-set-mo').fadeIn(500);
+	}
+
+	$(".word-suggested-comment").fadeOut(10000);
+
+	// word-set을 제거하여 초기화
+	// 새로 쓸 빈 단어 데이터를 생성하여 워드게임에 추가
+	// 지정된 단어의 길이 만큼 word-set dom을 1개 이상 추가
+	// 제시어를 페이드 인으로 표시
+	function wordsetPreword(preword) {
+		console.log('length : ', preword.getWord().length);
+
+		// 지우기... 초기화 
+		$( ".word-set" ).remove();
+
+		// new word object 사용할 단어장 추가
+	    var wd = new word();
+		var widx = _wp.putWord(wd);
+
+		// 추가하기
+		for(var i=0; i<preword.getWord().length; i++) {
+			wordsetAppend();
+		}
+		$(".word-suggested-comment").fadeIn(200);
+		$(".word-suggested-text").text(preword.getWord()).fadeIn(500);
+/*
+		for(var i=0; i<preword.getWord().length; i++) {
+			var tt = preword.getWord();
+			var sc = tt[i]; // preword.getWord().getCharacter(i);
+			console.log('test...', sc);
+
+			var brokensuggested = $("<span></span>").text(sc).addClass(".word-suggested-text");
+			brokensuggested.hide().appendTo(".word-suggested").fadeIn(500);
+		}
+*/
+	}
+// jquery chain multiple ajax calls
+// http://stackoverflow.com/questions/27530428/jquery-ajax-call-chaining-with-multiple-dependencies
+// 여러건의 비동기 콜의 완료 체크
+	function wordsetEffect() {
+		$(".word-suggested-result").text("참 잘했어요!").fadeIn(500).delay(2000).queue(function() {
+			console.log('wordsetEffect ------');
+			$(".word-set-suggested").addClass("flash");
+			wordsetPreword(_wp.getPreWord());
+			$(".word-suggested-result").dequeue();   			
+			$(".word-suggested-result").fadeOut(500).text("");
+		});
+	}
+
+//console.log("_wp => ", _wp);
+
+	wordsetPreword(_wp.getPreWord());
+
+	function checkWordSpell() {
+		// preword를 썼다고 판단될 때? 마지막 단어의 종성 혹은 중성을 썼을 경우
+		// 스펠을 체크해서 틀린 곳에 배경 색 바
+
+		// preword와 입력 한 현재 값을 비교
+		if( $(".word-suggested-text").text() == _wp.getCurrentWord().getWord() ) {
+			// 같다면 축하 메시지와 다음 preword 제시		
+			console.log("equal!", $(".word-suggested-text").text(), ' == ', _wp.getCurrentWord().getWord());
+
+			var prewd = _wp.goNextPreWord();
+			if(prewd) {
+				console.log('new setting - ', prewd);	
+				// 맞췄다는 표시
+				wordsetEffect('wordsetPreword', prewd);
+				// 다음 제시어 이
+			//	wordsetPreword( prewd );
+			} else {
+				console.log('end of pre word');
+				console.log('_wp full log =>' , _wp);
+				alert("더 이상 연습 단어가 없습니다.");
+			}
+		} else {
+			console.log("not equal!", $(".word-suggested-text").text(), ' != ', _wp.getCurrentWord().getWord());
+			// 다르다면 필요시 가이드 제시		
+			// 오탈자가 있는 해당 부분 반짝이?
+		}
+	}
+
+	function wordsetAppend() {
+		var chr = new character();
+		_wp.setNewCharacter(chr);
+
+		var nWordSetValue = $("<div></div>").addClass("word-set-value").droppable({
+			accept: ".syllable-button-mo", 
+			hoverClass: "word-set-middle-hover",
+			drop: function( event, ui ) {
+				//    wordinst.pushEvent(event, ui, middle);
+				var idV = $(this).parent(".word-set").index();
+				console.log('set middle - ', idV, event, ui );  
+				if(!_wp.getWordCharacter(idV, 'first')) 
+					_wp.setWordCharacter(idV, 'ㅇ', 'first');
+				_wp.setWordCharacter(idV, ui.draggable.text(), 'middle');
+
+				checkWordSpell();
+			}
+		});
+
+		var nWordSetSuggested = $("<div></div>").addClass("word-set-suggested");
+
+		var nWordSetFirst = $("<div></div>").addClass("word-set-first").droppable({
+			accept: ".syllable-button-ja", 
+			hoverClass: "word-set-first-hover",
+			drop: function( event, ui ) {
+				//    wordinst.pushEvent(event, ui, first);
+				var idV = $(this).parent(".word-set").index();
+				console.log('set first - ', idV, event, ui );
+
+				_wp.setWordCharacter(idV, ui.draggable.text(), 'first');
+
+				checkWordSpell();				
+			}
+		});
+
+		var nWordSetEnd = $("<div></div>").addClass("word-set-end").droppable({
+			accept: ".syllable-button-ja", 
+			hoverClass: "word-set-end-hover",
+			drop: function( event, ui ) {
+				//    wordinst.pushEvent(event, ui, end);
+				var idV = $(this).parent(".word-set").index();
+				console.log('set end - ', idV, event, ui );
+
+				// 모음 혹은 초성이 세팅이 안되어 있으면 경고 날리고 취소
+				if( !_wp.getWordCharacter(idV, 'middle')) {
+					alert("모음 먼저 세팅한 후에 종성 입력이 가능합니다.");
+					return false;
+				}
+				_wp.setWordCharacter(idV, ui.draggable.text(), 'end');
+
+				checkWordSpell();				
+			}
+		});
+
+		var nWordSetInterface = $("<div></div>").addClass("word-set-interface");
+
+
+		var nWordSetButtonClear = $("<div></div>").append("지우기").addClass("word-set-button-clear").on('click', function(event) {
+			var $item = $( this ),
+			$target = $( event.target );
+
+			console.log("clear : ", $(this).closest(".word-set").index());
+
+			var idV = $(this).closest(".word-set").index();
+
+			_wp.setWordCharacterClear(idV);
+		});
+
+		var nWordSetButtonDelete = $("<div></div>").append("삭제").addClass("word-set-button-delete").on('click', function(event) {
+			var $item = $( this ),
+			$target = $( event.target );
+
+			console.log("delete : ", $(this).closest(".word-set").index(), ' -> ', $(this));
+
+			var idV = $(this).closest(".word-set").index();
+
+			if ($(".word-set").length == 1)
+				alert("더 이상 지울 수 없습니다.");
+			else {
+				$(this).closest(".word-set").fadeOut( "normal", function() {
+					var del = _wp.setWordCharacterDelete(idV);	
+					$(this).closest(".word-set").remove();
+					console.log('remove complete...');
+			    });
+			}
+		});
+
+		nWordSetInterface.append(nWordSetButtonClear, nWordSetButtonDelete);
+	
+		nWordSetButtonClear.hide();
+		nWordSetButtonDelete.hide();
+	
+		nWordSetInterface.hover(function() {
+			nWordSetButtonDelete.fadeIn(500);
+			nWordSetButtonClear.fadeIn(500);
+		}, function() {
+			nWordSetButtonDelete.fadeOut(300);
+			nWordSetButtonClear.fadeOut(300);
+		});
+
+		var nWordSet = $("<div></div>").addClass("word-set");
+		nWordSet.append(nWordSetValue, nWordSetSuggested, nWordSetFirst, nWordSetEnd, nWordSetInterface);
+
+		nWordSet.hide().appendTo('.word-work-canvas').fadeIn(500);
+	}
+
+	$( ".word-button-add-right" ).click(function( event ) {	
+		console.log('add : ', event.target, $(this));
+		var $item = $( this ),
+		$target = $( event.target );
+
+		if($target.is( ".word-button-add-right")) {
+			wordsetAppend();
+		}
+	}); 
+});
+</script>
+
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">재미있는 한글 놀이</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">그림맞추기</a></li>
+        <li><a href="#">따라써보기</a></li>
+        <li><a href="#">듣고써보기</a></li>
+        <!-- 사용자 이미지 
+        <li><img src="img/user-top.png" width="70px" align="right"></li>
+    	-->
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<!-- Tool -->
+<div class="centerdiv container-fluid bg-3">
+	<div class="word-work-frame noselect">
+		<div class="word-suggested">
+			<span class="word-suggested-comment">따라 써봐요</span> 
+			<span class="word-suggested-text"></span>
+			<span class="word-suggested-result"></span>
+		</div>
+	    <div class="word-work-interface">
+	        <div class="syllable-set-ja"></div>
+	    </div>
+	    <div class="word-work-main">
+	        <div class="word-work-left">
+	            <div class="word-button-add-left">+</div>
+	        </div>
+	        <div class="word-work-canvas"></div>
+	        <div class="word-work-right">
+	            <div class="word-button-add-right">+</div>
+	        </div>
+	    </div>
+	    <div class="word-work-interface">
+	        <div class="syllable-set-mo"></div>
+	    </div>
+	</div>
+</div>
+
+
+<!-- Footer -->
+<footer class="footer bg-1 text-center">
+  <p>hanguly for Korean language learner</p>
+</footer>
+</body>
+<html>
