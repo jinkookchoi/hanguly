@@ -1,6 +1,6 @@
 ## Hanguly
 + I made this simple web app for my first daughter
-+ is web based Korean Jamo system learning app
++ This is web application for learning Korean characters especially Jamo System of Korean
 + Jamo is the types of Korean characters
 + Ja(Ja-eum) means consonant of Korean characters
 + Mo(Mo-eum) menas vowel of Korean characters
