@@ -1138,7 +1138,32 @@ function wordplay() {
 var _wp = new wordplay();
 _wp.config.put("wsv", ".word-set-value");
 // 향후 word 객체를 직접 할당, 한글/이미지 등의 정보 반영
-_wp.setPreWordList([new word("곰돌이"), new word("아이"), new word("너"), new word("여우"), new word("가위"), new word("놀이터"), new word("자동차"), new word("최은서"), new word("바나나"),  new word("우리나라"), new word("태극기"), new word("최연우"), new word("이정현"), new word("최진국"), new word("엄마"), new word("아빠"), new word("돼지"), new word("똥"), new word("방구")]);
+//_wp.setPreWordList([new word("곰돌이"), 
+//    new word("아이"), new word("너"), new word("여우"), new word("가위"), new word("놀이터"), 
+//    new word("자동차"), new word("최은서"), new word("바나나"),  new word("우리나라"), 
+//    new word("태극기"), new word("최연우"), new word("이정현"), new word("최진국"), 
+//    new word("엄마"), new word("아빠"), new word("돼지"), new word("똥"), new word("방구")]);
+
+word_list = [
+  "사과", "수박", "포도", "바나나", "바지", "양말", "치마", "모자", "빵", 
+  "물", "사탕", "우유", "주스", "아이스크림", "컵", "비누", "칫솔", "수건", 
+  "휴지", "치약", "소", "오리", "돼지", "강아지", "고양이", "병아리", 
+  "꽃", "새", "벌", "나무", "나비", "거미", "책", "구두", "가방", "인형", 
+  "의자", "우산", "배", "기차", "버스", "자전거", "비행기", "오토바이", 
+  "곰", "사자", "하마", "기린", "코끼리", "호랑이", "공", "북", "나팔", 
+  "가위", "풍선", "크레파스", "오이", "양파", "당근", "고구마", "옥수수",
+  "토마토", "악어", "타조", "거북", "원숭이", "개구리", "얼룩말", 
+  "시계", "전화기", "피아노", "카메라", "다리미", "냉장고", "양", "뱀", 
+  "토끼", "사슴", "다람쥐", "코뿔소", "모자꽃", "구두꽃", "우산꽃", "빵나무", 
+  "사탕나무", "아이스크림나무"
+]
+
+word_obj_list = []
+
+for(var i=0; i<word_list.length; i++) {
+    word_obj_list.push(new word(word_list[i]))
+}
+_wp.setPreWordList(word_obj_list)
 
 $(document).ready(function(){
 	// ja button set
@@ -1366,16 +1391,14 @@ $(document).ready(function(){
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">재미있는 한글 놀이</a>
+      <a class="navbar-brand" href="#">연우의 재미있는 한글 놀이</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">그림맞추기</a></li>
         <li><a href="#">따라써보기</a></li>
         <li><a href="#">듣고써보기</a></li>
-        <!-- 사용자 이미지
-        <li><img src="img/user-top.png" width="70px" align="right"></li>
-    	-->
+        <li><img src="../img/user-top.png" width="70px" align="right"></li>
       </ul>
     </div>
   </div>
