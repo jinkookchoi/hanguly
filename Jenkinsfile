@@ -1,22 +1,26 @@
 pipeline {
-    agent { docker { image 'ubuntu:18.04' } }
+    agent any
     environment {  
-        PROJECT_NAME = 'aiduez-aian_serving'  
-        REGISTRY_URL = 'repo.chelsea.kt.co.kr/'
-        REGISTRY_CREDENTIALS_ID = 'aiduez_chelsea'
-        SONAR_CREDENTIALS_ID = 'aiduez_sonar'
-        IMAGE_NAME = 'aiduez/aian_serving'
-        BASE_TAG = 'base'
+        registry = "jupyter/tensorflow-notebook"
+        registryCredential = 'dockerhub'
+        dockerImage = ''
     }  
     stages {
-        stage('build') {
+        stage('Build') {
             steps {
                 sh 'echo "Hello World"'
             }
         }
-        stage("build and push image"){
+        stage('Building image') {
+          steps{
+            script {
+              dockerImage = docker.build registry + ":$BUILD_NUMBER"
+            }
+          }
+        }
+        stage("Deploy Image"){
             steps{
-                sh 'echo "Hello World ${PROJECT_NAME}"'
+                sh 'echo "Hello World ${registryCredential}"'
             }
         }
     }
