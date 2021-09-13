@@ -1,27 +1,20 @@
 pipeline {
-    environment {  
-        registry = "jupyter/tensorflow-notebook"
-        registryCredential = 'dockerhub'
-        dockerImage = ''
-    }  
     agent any
-    tools {nodejs "node" }
+
     stages {
         stage('Build') {
             steps {
-                sh 'echo "Hello World"'
+                echo 'Building..'
             }
         }
-        stage('Building image') {
-          steps{
-            script {
-              dockerImage = docker.build registry + ":$BUILD_NUMBER"
+        stage('Test') {
+            steps {
+                echo 'Testing..'
             }
-          }
         }
-        stage("Deploy Image"){
-            steps{
-                sh 'echo "Hello World ${registryCredential}"'
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
             }
         }
     }
