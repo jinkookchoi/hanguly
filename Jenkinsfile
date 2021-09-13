@@ -16,13 +16,8 @@ pipeline {
         }
         stage("build and push image"){
             steps{
-                script{
-                    docker.withRegistry("http://${REGISTRY_URL}", REGISTRY_CREDENTIALS_ID){
-                    docker.image("${IMAGE_NAME}:${BASE_TAG}").pull()
-                    }
-                }
+                sh 'echo "Hello World ${PROJECT_NAME}"'
             }
         }
-        
     }
 }
